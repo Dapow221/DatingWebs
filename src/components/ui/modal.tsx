@@ -13,7 +13,8 @@ import {
     Button
   } from '@chakra-ui/react'
   import type { CreateFormSchema } from '../validation/form'
-  import React from 'react'
+  import React, { useCallback, useState } from 'react'
+  import Test from './dropzone'
   import { useForm, Controller, SubmitHandler } from 'react-hook-form'
   import { api } from '~/utils/api'
   
@@ -75,6 +76,8 @@ import {
                       control={control}
                       render={({ field }) => <Input {...field} />}
                     />
+                    <FormLabel>Image</FormLabel>
+                    <Test/>
                   </FormControl>
                   <ModalFooter>
                     <Button colorScheme='ghost' mr={3} onClick={onClose}>

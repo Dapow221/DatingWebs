@@ -42,11 +42,9 @@ export const postRouter = createTRPCRouter({
     const posts = db.post.findMany({
       where: {
         createdById: input
-      },
-      include: {
-        couples: true
       }
     })
+    console.log(posts)
 
     return posts;
   })

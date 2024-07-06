@@ -18,6 +18,7 @@ model Post {
     id              Int      @id @default(autoincrement())
     title           String
     description     String
+    images          Image[]
     
     createdBy       User   @relation(fields: [createdById], references: [id], name: "createdBy")
     couples         User   @relation(fields: [couplesId], references: [id], name: "couples")
@@ -27,7 +28,14 @@ model Post {
 
     couplesId       String
     createdById     String
-}   
+}
+
+model Image {
+    id        Int     @id @default(autoincrement())
+    url       String
+    postId    Int
+    post      Post    @relation(fields: [postId], references: [id])
+}
 
 // Necessary for Next auth
 model Account {
