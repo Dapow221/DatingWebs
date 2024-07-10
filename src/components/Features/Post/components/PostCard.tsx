@@ -12,10 +12,12 @@ type PostCardProps = {
   id: string,
   title: string,
   description: string,
-  createdBy: string
+  createdBy: string,
+  images: { url: string }[]
 }
 
 export const PostCard = (props: PostCardProps) => {
+  
   return (
     <Card className="w-full max-w-2xl mt-2">
       <CardHeader>
@@ -25,27 +27,15 @@ export const PostCard = (props: PostCardProps) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 gap-4 mt-4">
-          <Image
-            src="https://www.greenscene.co.id/wp-content/uploads/2022/09/Luffy-4.jpg"
-            alt="Image 1"
-            className="h-50 w-full rounded object-cover"
-          />
-          <Image
-            src="https://www.greenscene.co.id/wp-content/uploads/2022/09/Luffy-4.jpg"
-            alt="Image 2"
-            className="h-50 w-full rounded object-cover"
-          />
-          <Image
-            src="https://www.greenscene.co.id/wp-content/uploads/2022/09/Luffy-4.jpg"
-            alt="Image 3"
-            className="h-50 w-full rounded object-cover"
-          />
-          <Image
-            src="https://www.greenscene.co.id/wp-content/uploads/2022/09/Luffy-4.jpg"
-            alt="Image 4"
-            className="h-50 w-full rounded object-cover"
-          />
+      <div className="grid grid-cols-2 gap-4 mt-2">
+          {props.images?.map((image, index) => (
+            <Image
+              key={index}
+              src={image.url}
+              alt={`Image ${index + 1}`}
+              className="h-50 w-full rounded object-cover"
+            />
+          ))}
         </div>
       </CardContent>
       <CardFooter>

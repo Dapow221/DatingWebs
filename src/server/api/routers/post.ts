@@ -19,19 +19,29 @@ export const postRouter = createTRPCRouter({
     z.object({
       title: z.string().min(3).max(80),
       description: z.string().min(3).max(280),
-      createdById: z.string().cuid()
+      createdById: z.string().cuid(),
+      images: z.array(z.string().url()).optional()
     })
   ).mutation(async ({ ctx, input }) => {
     const { db, session } = ctx
 
-    await db.post.create({
+    const newPost = await db.post.create({
       data: {
         title: input.title,
         description: input.description,
         couplesId: session.user.id,
-        createdById: input.createdById
+        createdById: input.createdById,
       }
-    })
+    });
+
+    if (input.images && input.images.length > 0) {
+      await db.image.createMany({
+        data: input.images.map((imageUrl) => ({
+          url: imageUrl,
+          postId: newPost.id,
+        })),
+      });
+    }
   }),
 
   getUserPosts: publicProcedure.input(
@@ -42,9 +52,11 @@ export const postRouter = createTRPCRouter({
     const posts = db.post.findMany({
       where: {
         createdById: input
+      },
+      include: {
+        images: true,
       }
     })
-    console.log(posts)
 
     return posts;
   })

@@ -9,7 +9,8 @@ type UserPageProps = {
   id: string,
   title: string,
   description: string,
-  createdBy: string
+  createdBy: string,
+  images: { url: string }[]
 }
 
 
@@ -32,6 +33,7 @@ export default function Home(props: UserPageProps) {
             title={post.title}
             description={post.description}
             createdBy={post.createdById}
+            images={post.images}
             />
           })
          }
