@@ -89,7 +89,7 @@ const Navbar: React.FC<NavbarProps> = ({ path }) => {
                     <Flex align="center" mr={5}>
                     <Wrap>
                         <WrapItem>
-                            <Avatar src={data?.user.image || ""} size='md'/>
+                            <Avatar src={data?.user.image ?? " "} size='md'/>
                         </WrapItem>
                     </Wrap>
                     <Box ml={3}>
