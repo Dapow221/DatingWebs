@@ -20,6 +20,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { api } from '~/utils/api';
 import { useDropzone } from "react-dropzone";
 import uploadToS3 from "~/server/s3"
+import Image from 'next/image';
 
 interface FileWithPreview extends File {
   preview: string;
@@ -143,7 +144,7 @@ export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
 
                     {files.map((file, index) => (
                       <div key={index} className="my-2">
-                        <img
+                        <Image
                           className="w-full h-auto max-w-xl"
                           src={file.preview}
                           alt={`Preview ${index}`}
