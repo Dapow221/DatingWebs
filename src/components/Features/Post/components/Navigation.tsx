@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef } from "react";
 import NextLink from "next/link";
 import {
     Container,
@@ -16,7 +16,6 @@ import {
     WrapItem,
     Avatar,
     Button,
-    useToast,
     useColorModeValue,
 } from "@chakra-ui/react";
 import { AlignJustify } from "lucide-react";

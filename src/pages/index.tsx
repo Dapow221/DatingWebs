@@ -5,16 +5,7 @@ import { PostCard } from "~/components/Features/Post/components/PostCard";
 import { OpenModal } from "~/components/ui/modal";
 import { useSession } from "next-auth/react";
 
-type UserPageProps = {
-  id: number,
-  title: string,
-  description: string,
-  createdBy: string,
-  images: { url: string }[]
-}
-
-
-export default function Home(props: UserPageProps) {
+export default function Home() {
   const { data: session } = useSession();
   const { data: posts } = api.post.getUserPosts.useQuery()
 
