@@ -13,8 +13,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import Image from "~/components/ui/image";
 import { api } from "~/utils/api";
-import Image from "next/image";
 import { useToast } from "@chakra-ui/react";
 
 type PostCardProps = {
