@@ -6,7 +6,7 @@ import { OpenModal } from "~/components/ui/modal";
 import { useSession } from "next-auth/react";
 
 type UserPageProps = {
-  id: string,
+  id: number,
   title: string,
   description: string,
   createdBy: string,
@@ -16,7 +16,7 @@ type UserPageProps = {
 
 export default function Home(props: UserPageProps) {
   const { data: session } = useSession();
-  const { data: posts } = api.post.getUserPosts.useQuery(session?.user.id)
+  const { data: posts } = api.post.getUserPosts.useQuery()
 
   if (!session?.user) {
     return null
@@ -29,6 +29,7 @@ export default function Home(props: UserPageProps) {
          {
           posts?.map(post => {
             return  <PostCard
+            key={post.id}
             id={post.id}
             title={post.title}
             description={post.description}

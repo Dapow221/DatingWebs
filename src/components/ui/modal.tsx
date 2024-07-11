@@ -10,7 +10,9 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Button
+  Button,
+  Spinner,
+  useToast
 } from '@chakra-ui/react';
 import type { CreateFormSchema } from '../validation/form';
 import React, { useState, useEffect } from 'react';
@@ -36,10 +38,10 @@ const uploadImages = async (files: FileWithPreview[]): Promise<string[]> => {
 };
 
 export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
-
+  const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<FileWithPreview[]>([]);
   const { getRootProps:getRootfileProps, getInputProps:getInputfileProps } = useDropzone({
-    accept: "image/*",
+    accept: { 'image/*': [] },
     onDrop: (acceptedFiles: File[]) => {
       const filesWithPreview = acceptedFiles.map((file) =>
         Object.assign(file, {
@@ -63,14 +65,33 @@ export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
     }
   });
 
+  const toast = useToast();
+
   const { mutate } = api.post.create.useMutation({
     onSuccess: () => {
+      setLoading(false);
       reset();
+      setFiles([]);
       onClose();
+      toast({
+        title: "Post created.",
+        description: "Your post has been successfully created.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     },
 
     onError: (error) => {
-      console.log("Error creating post:", error);
+      setLoading(false);
+      toast({
+        title: "Error creating post.",
+        description: "Ups!! Something Wrong...",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      console.log(error)
     }
   });
 
@@ -103,18 +124,18 @@ export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
                   <Controller
                     name="title" 
                     control={control}
-                    render={({ field }) => <Input {...field} />}
+                    render={({ field }) => <Input {...field}/>}
                   />
                   <FormLabel>Description</FormLabel>
                   <Controller
                     name="description" 
                     control={control}
-                    render={({ field }) => <Input {...field} />}
+                    render={({ field }) => <Input {...field}/>}
                   />
                   <FormLabel>Image</FormLabel>
                   <div
                       {...getRootfileProps()}
-                      className={`flex flex-col items-center p-5 border-2 border-dashed bg-gray-100 text-gray-500 outline-none transition-border duration-150 ease-in-out`}
+                      className={`flex flex-col items-center p-5 border-2 border-dashed outline-none transition-border duration-150 ease-in-out`}
                     >
                       <input {...getInputfileProps()} />
                       <span className="text-sm">Drop hero image here, or click to select file</span>
@@ -131,10 +152,12 @@ export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
                     ))}
                 </FormControl>
                 <ModalFooter>
-                  <Button colorScheme='ghost' mr={3} onClick={onClose}>
+                  <Button colorScheme='ghost' mr={3} onClick={onClose} variant='ghost'>
                     Close
                   </Button>
-                  <Button type='submit' variant='ghost'>Add Post</Button>
+                  <Button type='submit' variant='ghost'>
+                    {loading ? <Spinner size="sm" /> : 'Add Post'}
+                  </Button>
                 </ModalFooter>
               </form>
             </ModalBody>

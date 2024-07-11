@@ -17,8 +17,8 @@ export const postRouter = createTRPCRouter({
 
   create: protectedProcedure.input(
     z.object({
-      title: z.string().min(3).max(80),
-      description: z.string().min(3).max(280),
+      title: z.string().min(3).max(380),
+      description: z.string().min(3).max(1000),
       createdById: z.string().cuid(),
       images: z.array(z.string().url()).optional()
     })
@@ -44,20 +44,30 @@ export const postRouter = createTRPCRouter({
     }
   }),
 
-  getUserPosts: publicProcedure.input(
-    z.string().cuid()
-  ).query(async ({ ctx, input }) => {
-    const { db, session } = ctx;
+  getUserPosts: publicProcedure.query(async ({ ctx }) => {
+    const { db } = ctx;
 
-    const posts = db.post.findMany({
-      where: {
-        createdById: input
-      },
+    const posts = await db.post.findMany({
       include: {
         images: true,
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
     })
 
     return posts;
+  }),
+
+  deletePosts: publicProcedure.input(
+    z.number()
+  ).mutation(async ({ ctx, input }) => {
+    const { db } = ctx;
+
+    await db.post.delete({
+      where: {
+        id: input as unknown as number
+      } 
+    })
   })
 });
