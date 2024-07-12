@@ -20,6 +20,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { api } from '~/utils/api';
 import { useDropzone } from "react-dropzone";
 import uploadToS3 from "~/server/s3"
+import DatePicker from "~/components/Features/Post/components/DatePicker"
 
 interface FileWithPreview extends File {
   preview: string;
@@ -40,6 +41,8 @@ const uploadImages = async (files: FileWithPreview[]): Promise<string[]> => {
 export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<FileWithPreview[]>([]);
+  const [datePosted, setDatePosted] = useState<Date | null>(null)
+
   const { getRootProps:getRootfileProps, getInputProps:getInputfileProps } = useDropzone({
     accept: { 'image/*': [] },
     onDrop: (acceptedFiles: File[]) => {
@@ -72,6 +75,7 @@ export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
       setLoading(false);
       reset();
       setFiles([]);
+      setDatePosted(null)
       onClose();
       toast({
         title: "Post created.",
@@ -102,6 +106,7 @@ export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
       description: values.description,
       createdById,
       images: imageUrls,
+      datePosted: datePosted?.toLocaleDateString() as string
     });
   }
 
@@ -113,8 +118,8 @@ export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
         <Button onClick={onOpen}>Create Post</Button>
 
         <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
+          <ModalOverlay/>
+          <ModalContent className="mr-5 ml-5">
             <ModalHeader>Create Post</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
@@ -150,6 +155,8 @@ export const OpenModal: React.FC<PostFormProps> = ({ createdById }) => {
                         />
                       </div>
                     ))}
+                  <FormLabel>Select Date</FormLabel>
+                  <DatePicker onSelect={setDatePosted}/>
                 </FormControl>
                 <ModalFooter>
                   <Button colorScheme='ghost' mr={3} onClick={onClose} variant='ghost'>

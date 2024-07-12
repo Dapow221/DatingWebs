@@ -20,6 +20,7 @@ export const postRouter = createTRPCRouter({
       title: z.string().min(3).max(380),
       description: z.string().min(3).max(1000),
       createdById: z.string().cuid(),
+      datePosted: z.string().min(3).max(30),
       images: z.array(z.string().url()).optional()
     })
   ).mutation(async ({ ctx, input }) => {
@@ -31,6 +32,7 @@ export const postRouter = createTRPCRouter({
         description: input.description,
         couplesId: session.user.id,
         createdById: input.createdById,
+        datePosted: input.datePosted
       }
     });
 
@@ -50,6 +52,7 @@ export const postRouter = createTRPCRouter({
     const posts = await db.post.findMany({
       include: {
         images: true,
+        createdBy: true
       },
       orderBy: {
         createdAt: 'desc'

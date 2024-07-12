@@ -17,18 +17,22 @@ export default function Home() {
     <HomeLayouts>
       <Container className="mt-5">
         <OpenModal createdById={session.user.id}/>
-         {
+        {
           posts?.map(post => {
-            return  <PostCard
-            key={post.id}
-            id={post.id}
-            title={post.title}
-            description={post.description}
-            createdBy={post.createdById}
-            images={post.images}
-            />
+            const createdBy = typeof post.createdBy === 'object' ? post.createdBy.name : post.createdBy;
+
+            return (
+              <PostCard
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                description={post.description}
+                createdBy={createdBy as string}
+                images={post.images}
+              />
+            );
           })
-         }
+        }
       </Container>
     </HomeLayouts>
   );
