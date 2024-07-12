@@ -38,16 +38,13 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => {
-      console.log('Session callback:', { session, user });
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: user.id,
-        },
-      };
-    },
+    session: ({ session, user }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: user.id,
+      },
+    }),
   },
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
@@ -65,7 +62,6 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
-  secret: env.NEXTAUTH_SECRET,
 };
 
 /**
