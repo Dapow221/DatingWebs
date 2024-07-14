@@ -15,14 +15,15 @@ import {
 } from "~/components/ui/dropdown-menu";
 import Image from "~/components/ui/image";
 import { api } from "~/utils/api";
-import { useToast } from "@chakra-ui/react";
+import { propNames, useToast } from "@chakra-ui/react";
 
 type PostCardProps = {
   id: number,
   title: string,
   description: string,
   createdBy: string,
-  images: { url: string }[]
+  images: { url: string }[],
+  datePosted: string
 }
 
 export const PostCard = (props: PostCardProps) => {
@@ -86,8 +87,13 @@ export const PostCard = (props: PostCardProps) => {
               ))}
             </div>
           </CardContent>
-      <CardFooter>
-        <p>Posted By: {props.createdBy}</p>
+      <CardFooter className="flex flex-col items-start text-sm">
+        <div>
+          <p>Posted By: {props.createdBy}</p>
+        </div>
+        <div>
+          <p>Posted Time: {props.datePosted}</p>
+        </div>
       </CardFooter>
     </Card>
   );
