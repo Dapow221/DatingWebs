@@ -31,7 +31,7 @@ type LinkProps = {
 
 type MenuLinkProps = React.ComponentProps<typeof Link> & {
     href: string;
-};
+}
 
 const LinkItem: React.FC<LinkProps> = ({ href, path, target, children, ...props }) => {
     const active = path === href;
