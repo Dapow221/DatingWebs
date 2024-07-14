@@ -26,6 +26,7 @@ type PostCardProps = {
   datePosted: string
 }
 
+
 export const PostCard = (props: PostCardProps) => {
   const toast = useToast()
   const { mutate: deletePost } = api.post.deletePosts.useMutation({
