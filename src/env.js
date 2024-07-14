@@ -7,8 +7,10 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    DATABASE_URL: z.string().url(),
-    // POSTGRES_URL_NON_POOLING: z.string().url(), use when in production
+    // DATABASE_URL: z.string().url(),
+    POSTGRES_PRISMA_URL: z.string().url(),
+    POSTGRES_URL_NON_POOLING: z.string().url(), 
+    // use when in production
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -45,9 +47,10 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
-    // POSTGRES_PRISMA_URL: process.env.POSTGRES_PRISMA_URL,
-    // POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING, // use when in production
+    // DATABASE_URL: process.env.DATABASE_URL,
+    POSTGRES_PRISMA_URL: process.env.POSTGRES_PRISMA_URL,
+    POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING, 
+    // use when in production
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
