@@ -171,12 +171,22 @@ const HomePage = () => {
               title="How We Met"
               >
               <Prose>
-                <Paragraph>Our story began on Twitter 🐦, where we first connected and started to know each other 💕.</Paragraph>
-                <Paragraph>For one week, we exchanged messages, slowly understanding each other&apos;s world, our thoughts, and our dreams 💭.</Paragraph>
-                <Paragraph>There was something special brewing between us, a connection that felt both exciting and unexpected 🌟.</Paragraph>
+                <Paragraph>Our story began on Twitter 🐦, where we first connected and started to know each other 💕. 
+  
+                  For one week, we exchanged messages, slowly understanding each other&apos;s world, our thoughts, and our dreams 💭. 
+                  
+                  There was something special brewing between us, a connection that felt both exciting and unexpected 🌟.
+                  
+                  As the year was drawing to a close, we decided to meet on December 31st, 2023 🗓️. 
+                  
+                  The anticipation was electric - would we have the same connection in person that we had online? 🤔,
+                  To our surprise and delight, we matched perfectly 💖. 
+                </Paragraph>
+                  <Paragraph>What started as a first date transformed into something much more profound 💑.
+                </Paragraph>
                 <blockquote>
                   <Text as="em" color="pink.500">
-                    "That night was magical ✨."
+                  &quot;That night was magical ✨.&quot;
                   </Text>
                 </blockquote>
                 <Paragraph>
