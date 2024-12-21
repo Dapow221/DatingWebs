@@ -155,7 +155,7 @@ const HomePage = () => {
             mb={4}
             className={headerTitleClass}
           >
-            Divanda and Dapoww Journey's
+            Divanda and Dapoww Journey
           </Heading>
           <Text 
             fontSize="lg" 

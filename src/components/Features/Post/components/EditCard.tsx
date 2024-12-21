@@ -131,7 +131,7 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, postId, o
       reset({
         title: post.title,
         description: post.description,
-        datePosted: post.datePosted || '',
+        datePosted: post.datePosted ?? '',
       });
       setExistingImages(post.images);
       if (post.datePosted) {
@@ -355,7 +355,7 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, postId, o
                 variant="ghost"
                 isLoading={loading}
                 loadingText="Updating..."
-                isDisabled={!isValid || loading || !datePosted}
+                isDisabled={!isValid ?? loading ?? !datePosted}
               >
                 Save Changes
               </Button>
