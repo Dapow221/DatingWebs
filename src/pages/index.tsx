@@ -113,7 +113,7 @@ export default function Home() {
         <Flex mb={5} align="center" gap={2}>
           <Box flex={1}>
             <Select
-              value={selectedMonth?.toString() || ""}
+              value={selectedMonth?.toString() ?? ""}
               onChange={handleMonthChange}
             >
               <option value="">All Months</option>

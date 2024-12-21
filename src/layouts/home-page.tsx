@@ -172,7 +172,7 @@ const HomePage = () => {
               >
               <Prose>
                 <Paragraph>Our story began on Twitter 🐦, where we first connected and started to know each other 💕.</Paragraph>
-                <Paragraph>For one week, we exchanged messages, slowly understanding each other's world, our thoughts, and our dreams 💭.</Paragraph>
+                <Paragraph>For one week, we exchanged messages, slowly understanding each other&apos;s world, our thoughts, and our dreams 💭.</Paragraph>
                 <Paragraph>There was something special brewing between us, a connection that felt both exciting and unexpected 🌟.</Paragraph>
                 <blockquote>
                   <Text as="em" color="pink.500">
@@ -180,7 +180,7 @@ const HomePage = () => {
                   </Text>
                 </blockquote>
                 <Paragraph>
-                  Outside, the sky erupted with New Year's fireworks 🎆. In that moment, surrounded by the celebrations of a new year, the world seemed to celebrate our love.
+                  Outside, the sky erupted with New Year&apos;s fireworks 🎆. In that moment, surrounded by the celebrations of a new year, the world seemed to celebrate our love.
                 </Paragraph>
               </Prose>
           </MemoryCard>
