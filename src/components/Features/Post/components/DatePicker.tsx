@@ -1,22 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { Button, Popover, PopoverTrigger, PopoverContent } from "@chakra-ui/react";
 import { Calendar } from "~/components/ui/calendar";
 import { cn } from "~/lib/utils";
 
 type DatePickerProps = {
-    onSelect: (date: Date) => void;
+  onSelect: (date: Date) => void;
+  initialDate?: Date | null;
+};
+
+const DatePicker: React.FC<DatePickerProps> = ({ onSelect, initialDate }) => {
+  const [date, setDate] = useState<Date | undefined>(() => {
+    if (initialDate && isValid(initialDate)) {
+      return initialDate;
+    }
+    return undefined;
+  });
+
+  useEffect(() => {
+    if (initialDate && isValid(initialDate)) {
+      setDate(initialDate);
+    }
+  }, [initialDate]);
+
+  const handleDateSelect = (newDate: Date | undefined) => {
+    if (newDate && isValid(newDate)) {
+      setDate(newDate);
+      onSelect(newDate);
+    }
   };
 
-const DatePicker: React.FC<DatePickerProps> = ({ onSelect }) => {
-  const [date, setDate] = useState<Date>();
-
-  const handleDateSelect = (date: Date | undefined) => {
-    setDate(date);
-    if (date) {
-      onSelect(date);
+  const formatDate = (date: Date | undefined) => {
+    if (date && isValid(date)) {
+      try {
+        return format(date, "PPP");
+      } catch (error) {
+        console.error("Error formatting date:", error);
+        return "Invalid date";
+      }
     }
+    return "Pick a date";
   };
 
   return (
@@ -33,7 +57,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onSelect }) => {
           )}
           leftIcon={<CalendarIcon className="mr-2 h-4 w-4" />}
         >
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          <span>{formatDate(date)}</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent width="auto" padding={0}>

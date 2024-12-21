@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react"
 import Head from "next/head"
-import { Box, Container } from "@chakra-ui/react"
+import { Box, Container, useColorModeValue,} from "@chakra-ui/react"
 import Navbar from "~/components/Features/Post/components/Navigation"
 import Footer from "~/components/ui/footer"
 

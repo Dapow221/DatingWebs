@@ -23,7 +23,7 @@ model Post {
 
     createdAt       DateTime @default(now())
     updatedAt       DateTime @updatedAt
-    datePosted      String
+    datePosted      String?
 
     couplesId       String
     createdById     String

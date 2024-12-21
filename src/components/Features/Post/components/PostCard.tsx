@@ -15,7 +15,9 @@ import {
 } from "~/components/ui/dropdown-menu";
 import Image from "~/components/ui/image";
 import { api } from "~/utils/api";
-import { propNames, useToast } from "@chakra-ui/react";
+import { useToast, useColorMode } from "@chakra-ui/react";
+import { EditModal } from "./EditCard";
+import { useState } from "react";
 
 type PostCardProps = {
   id: number,
@@ -23,54 +25,83 @@ type PostCardProps = {
   description: string,
   createdBy: string,
   images: { url: string }[],
-  datePosted: string
+  datePosted: string,
+  onPostUpdated?: () => Promise<void>
 }
 
 
 export const PostCard = (props: PostCardProps) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const { colorMode } = useColorMode();
   const toast = useToast()
+
   const { mutate: deletePost } = api.post.deletePosts.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       toast({
         title: "Post deleted.",
-        description: "Please refresh your browser.",
+        description: "Post has been successfully deleted.",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
+      if (props.onPostUpdated) {
+        await props.onPostUpdated();
+      }
     },
-
     onError: (error) => {
       toast({
-        title: "Error creating post.",
-        description: "Ups!! Something Wrong...",
+        title: "Error deleting post.",
+        description: "Something went wrong!",
         status: "error",
         duration: 5000,
         isClosable: true,
       });
-      console.log(error)
+      console.error(error);
     }
-  })
+  });
 
   const onDelete = () => {
     deletePost(props.id)
   }
   
   return (
+    <>
     <Card className="w-full max-w-2xl mt-2">
       <CardHeader>
         <div className="flex justify-between mb-3">
           <CardTitle>{props.title}</CardTitle>
           <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Ellipsis />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent side="bottom" align="end">
-                <DropdownMenuItem onClick={onDelete} className="text-destructive">
-                  Delete Post
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-          </DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="focus:outline-none">
+              <Ellipsis className={colorMode === 'dark' ? 'text-white' : 'text-black'} />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent 
+            className={`
+              ${colorMode === 'dark' ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-black border-gray-200'}
+              rounded-md shadow-lg border p-1 min-w-[8rem]
+            `}
+          >
+            <DropdownMenuItem 
+              onClick={() => setIsEditModalOpen(true)}
+              className={`
+                ${colorMode === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}
+                cursor-pointer rounded-sm px-3 py-2 text-sm
+              `}
+            >
+              Edit Post
+            </DropdownMenuItem>
+            <DropdownMenuItem 
+              onClick={onDelete}
+              className={`
+                ${colorMode === 'dark' ? 'hover:bg-gray-700 text-red-400' : 'hover:bg-gray-100 text-red-600'}
+                cursor-pointer rounded-sm px-3 py-2 text-sm
+              `}
+            >
+              Delete Post
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
         </div>
         <CardDescription>
           {props.description}
@@ -97,5 +128,12 @@ export const PostCard = (props: PostCardProps) => {
         </div>
       </CardFooter>
     </Card>
+    <EditModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        postId={props.id}
+        onPostUpdated={props.onPostUpdated}
+      />
+    </>
   );
 };

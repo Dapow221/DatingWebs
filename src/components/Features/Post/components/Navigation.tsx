@@ -111,10 +111,10 @@ const Navbar: React.FC<NavbarProps> = ({ path }) => {
                         flexGrow={1}
                         mt={{ base: 4, md: 0 }}
                     >
-                        <LinkItem href="/works" path={path}>
+                        <LinkItem href="/" path={path}>
                             Wishlist
                         </LinkItem>
-                        <LinkItem href="/stuffs" path={path}>
+                        <LinkItem href="/" path={path}>
                             To Do
                         </LinkItem>
                     </Stack> : null
@@ -139,7 +139,7 @@ const Navbar: React.FC<NavbarProps> = ({ path }) => {
                                 <MenuItem as={MenuLink} href="/">
                                     Wishlist
                                 </MenuItem>
-                                <MenuItem as={MenuLink} href="/works">
+                                <MenuItem as={MenuLink} href="/">
                                     To Do
                                 </MenuItem>
                             </MenuList>
