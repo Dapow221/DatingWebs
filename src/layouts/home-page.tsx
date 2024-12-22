@@ -180,8 +180,8 @@ const HomePage = () => {
                   To our surprise and delight, we matched perfectly 💖. 
                 </Paragraph>
                 <Paragraph>
-                    We shared bebek (roasted duck) in place called "Gion", its flavors mingling with the excitement of our newfound connection 🍽️.
-                    Before this moment, we made a commitment to each other in "Warung Kopi" called "Giras" while sheltering from the rain 🌧️ and became a couple 💑.
+                    We shared bebek (roasted duck) in place called &quot;Gion&quot;, its flavors mingling with the excitement of our newfound connection 🍽️.
+                    Before this moment, we made a commitment to each other in &quot;Warung Kopi&quot; called &quot;Giras&quot; while sheltering from the rain 🌧️ and became a couple 💑.
                 </Paragraph>
                 <blockquote>
                   <Text as="em" color="pink.500">
