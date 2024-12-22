@@ -335,7 +335,7 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, postId, o
 
               {loading && uploadProgress > 0 && (
                 <div className="w-full">
-                  <Text fontSize="sm" mb={2}>Uploading: {Math.round(uploadProgress)}%</Text>
+                  <Text fontSize="sm" mb={2}>Loading: {Math.round(uploadProgress)}%</Text>
                   <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-blue-500 transition-all duration-300"

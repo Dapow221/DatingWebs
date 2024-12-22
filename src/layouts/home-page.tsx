@@ -171,18 +171,17 @@ const HomePage = () => {
               title="How We Met"
               >
               <Prose>
-                <Paragraph>Our story began on Twitter 🐦, where we first connected and started to know each other 💕. 
-  
+                <Paragraph>
+                  Our story began on Twitter 🐦, where we first connected and started to know each other 💕. 
                   For one week, we exchanged messages, slowly understanding each other&apos;s world, our thoughts, and our dreams 💭. 
-                  
                   There was something special brewing between us, a connection that felt both exciting and unexpected 🌟.
-                  
                   As the year was drawing to a close, we decided to meet on December 31st, 2023 🗓️. 
-                  
                   The anticipation was electric - would we have the same connection in person that we had online? 🤔,
                   To our surprise and delight, we matched perfectly 💖. 
                 </Paragraph>
-                  <Paragraph>What started as a first date transformed into something much more profound 💑.
+                <Paragraph>
+                    We shared bebek (roasted duck) in place called "Gion", its flavors mingling with the excitement of our newfound connection 🍽️.
+                    Before this moment, we made a commitment to each other in "Warung Kopi" called "Giras" while sheltering from the rain 🌧️ and became a couple 💑.
                 </Paragraph>
                 <blockquote>
                   <Text as="em" color="pink.500">
@@ -192,6 +191,7 @@ const HomePage = () => {
                 <Paragraph>
                   Outside, the sky erupted with New Year&apos;s fireworks 🎆. In that moment, surrounded by the celebrations of a new year, the world seemed to celebrate our love.
                 </Paragraph>
+                <Paragraph>After that, something unexpected happened and let it be our secret 🤫💕.</Paragraph>
               </Prose>
           </MemoryCard>
 
